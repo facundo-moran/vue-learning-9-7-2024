@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Hola mundo en VUE</title>
+</head>
+
+<body>
+
+    <!-- 
+        VUE app scope
+
+        por lo tanto el vue scope podria ser este div
+        en apps externas
+    --> 
+    <div id="app" style="max-width: 1280px; margin: 0 auto; overflow: hidden;" >
+        <header style="width: 90%; margin: 0 auto; text-align: center; font-size: 28px;">
+            <h1>
+                Top {{quotes.length }} Batman Saga Quotes
+            </h1>
+            <!-- <div style="display: flex; justify-content: end;"> -->
+                <!-- 
+                    v-show
+
+                    renderiza con display=none
+                -->
+                <!-- <button v-if="!esAuthorVisible" @click="addQuote" style="display: inline-block; padding: 8px 16px;border: none; border-radius: 8px;font-weight: bold;">+ Add Quote</button>
+            </div> -->
+            <form style="width: 90%; max-width: 520px; margin: 0 auto;" onsubmit="return false;">
+                <div style="display: flex; gap: 1rem;">
+                    <label for="quote">Add a Quote:</label>
+                    <input id="quote" v-model="quote" type="text" placeholder="press enter to send" style="border: none; border-bottom: 1px solid; padding: 8px 16px; font-size: 18px; flex-grow: 1;" @keypress.enter="addQuote()">
+                </div>
+            </form>
+        </header>
+        <main style="width: 90%; margin: 0 auto;">
+            <hr>
+            <ul style="list-style: none; margin: 0; padding: 0; max-height: 65dvh;overflow: scroll; scroll-behavior: smooth; overflow-x: hidden;">
+                <li v-for="({ quote, author, authorVisible }, idx) in quotes" style="font-size: 24px; margin-bottom: 8px; background-color: lightgrey; padding: 4px 16px; border-radius: 8px;"> 
+                    <h3>{{ idx+1 }} - {{ quote }}</h3>
+                    <p style="margin-left: 1em; background-color: red;" v-if="authorVisible">{{ author }}</p>
+                    <div v-if="!authorVisible" style="display: flex; justify-content: end;">
+                        <!-- 
+                            v-show
+
+                            renderiza con display=none
+                        -->
+                        <button @click="toggleAuthor(idx)" style="display: inline-block; padding: 8px 16px;border: none; border-radius: 8px;font-weight: bold;">Ver Author</button>
+                    </div>
+                </li>
+            </ul>
+        </main>
+    </div>
+    
+    <!-- <div id="app">{{ message }}</div>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const message = ref('Hello vue!')
+                return {
+                    message
+                }
+            }
+        }).mount('#app')
+    </script> -->
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
